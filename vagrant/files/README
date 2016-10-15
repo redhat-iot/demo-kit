@@ -1,0 +1,3 @@
+Put deployable files such as Kura installer and OSGi deployment packages in this directory.
+
+This directory is ignored by git.
