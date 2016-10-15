@@ -1,0 +1,9 @@
+# Copy this file to $HOME/.vagrant.d/redhat-iot-demo.yml and update installer name below
+---
+kura:
+  installer: 'kura_2.1.0-SNAPSHOT_fedorapi_installer.sh'
+
+#  installer: '<kura installer>'  
+# Unused for the time being
+#  location: '<kura source root>'
+#  version: '<kura version>'

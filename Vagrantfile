@@ -1,6 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require 'yaml'
+
+demo_config = YAML.load_file(File.join(ENV['HOME'], '.vagrant.d', 'redhat-iot-demo.yml'))
+
 # The private network IP of the VM. You will use this IP to connect to OpenShift.
 # This variable is ignored for Hyper-V provider.
 PUBLIC_ADDRESS="10.1.2.2"
@@ -12,7 +16,7 @@ VM_CPU = ENV['VM_CPU'] || 1
 VM_MEMORY = ENV['VM_MEMORY'] || 2048
 
 # Validate required plugins
-REQUIRED_PLUGINS = %w(vagrant-registration vagrant-sshfs)
+REQUIRED_PLUGINS = %w(vagrant-sshfs)
 # REQUIRED_PLUGINS = %w(vagrant-sshfs)
 errors = []
 
@@ -28,6 +32,9 @@ end
 
 
 Vagrant.configure(2) do |config|
+  if Vagrant.has_plugin?("vagrant-registration") then
+    config.registration.skip = true
+  end
   config.vm.box = 'rhel-7.2'
   # config.ssh.insert_key = false
   config.vm.provider "virtualbox" do |v, override|
@@ -47,62 +54,24 @@ Vagrant.configure(2) do |config|
   config.vm.network "private_network", ip: "#{PUBLIC_ADDRESS}" 
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
-  config.vm.synced_folder '/Users/ccustine/development/redhat/kura/kura/distrib/target', '/kura'
-  config.registration.skip = true
+  # config.vm.synced_folder demo_config['kura']['location'] + '/kura/distrib/target', '/kura'
   
-  # config.vm.network "forwarded_port", guest: 22, host: 2222
-  # vagrant-registration
-  # config.registration.skip = true
-  # if ENV.has_key?('SUB_USERNAME') && ENV.has_key?('SUB_PASSWORD')
-  #   config.registration.username = ENV['SUB_USERNAME']
-  #   config.registration.password = ENV['SUB_PASSWORD']
-  # end
-
-  # Proxy Information from environment
+  # Proxy Information
   # config.registration.proxy = PROXY = (ENV['PROXY'] || '')
   # config.registration.proxyUser = PROXY_USER = (ENV['PROXY_USER'] || '')
   # config.registration.proxyPassword = PROXY_PASSWORD = (ENV['PROXY_PASSWORD'] || '')
 
-  # vagrant-sshfs
-  # config.vm.synced_folder '.', '/vagrant', disabled: true
-  # if Vagrant::Util::Platform.windows?
-  #   target_path = ENV['USERPROFILE'].gsub(/\\/,'/').gsub(/[[:alpha:]]{1}:/){|s|'/' + s.downcase.sub(':', '')}
-  #   config.vm.synced_folder ENV['USERPROFILE'], target_path, type: 'sshfs', sshfs_opts_append: '-o umask=000 -o uid=1000 -o gid=1000'
-  # else
-  #   config.vm.synced_folder ENV['HOME'], ENV['HOME'], type: 'sshfs', sshfs_opts_append: '-o umask=000 -o uid=1000 -o gid=1000'
-  # end
-
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   sudo setsebool -P virt_sandbox_use_fusefs 1
-  # SHELL
-
-  # prevent the automatic start of openshift via service-manager by just enabling Docker
-  # config.servicemanager.services = "docker"
-
-  # explicitly enable and start OpenShift
-  # config.vm.provision "shell", run: "always", inline: <<-SHELL
-    # PROXY=#{PROXY} PROXY_USER=#{PROXY_USER} PROXY_PASSWORD=#{PROXY_PASSWORD} /usr/bin/sccli openshift
-  # SHELL
-
-  # config.vm.provision "shell", run: "always", inline: <<-SHELL
-  #   #Get the routable IP address of OpenShift
-  #   OSIP=`/opt/adb/openshift/get_ip_address`
-  #   echo
-  #   echo "Successfully started and provisioned VM with #{VM_CPU} cores and #{VM_MEMORY} MB of memory."
-  #   echo "To modify the number of cores and/or available memory set the environment variables"
-  #   echo "VM_CPU and/or VM_MEMORY respectively."
-  #   echo
-  #   echo "You can now access the OpenShift console on: https://${OSIP}:8443/console"
-  #   echo
-  #   echo "To use OpenShift CLI, run:"
-  #   echo "$ vagrant ssh"
-  #   echo "$ oc login"
-  #   echo
-  #   echo "Configured users are (<username>/<password>):"
-  #   echo "openshift-dev/devel"
-  #   echo "admin/admin"
-  #   echo
-  #   echo "If you have the oc client library on your host, you can also login from your host."
-  #   echo
-  # SHELL
+  config.vm.provision "shell", run: "always", env: {"KURA_INSTALLER" => demo_config['kura']['installer']}, inline: <<-SHELL
+    echo "Installing Kura from $KURA_INSTALLER"
+    sudo /vagrant/files/${KURA_INSTALLER}
+    sudo systemctl start kura
+    echo
+    echo "Successfully started and provisioned VM with #{VM_CPU} cores and #{VM_MEMORY} MB of memory."
+    echo "To modify the number of cores and/or available memory set the environment variables"
+    echo "VM_CPU and/or VM_MEMORY respectively."
+    echo
+    echo "You can now access the Kura console on: http://localhost:8080"
+    echo "Default login is admin/admin"
+    echo
+  SHELL
 end
