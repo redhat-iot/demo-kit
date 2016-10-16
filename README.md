@@ -8,10 +8,8 @@ Starting the Demo VM
 ```
 vagrant up
 ```
+More details in [these instructions](vagrant/README.md)
 
 Creating base RHEL box
 ==
-```
-$ cd packer
-$ ISO_URL=file://<fully qualified path to iso> packer build --force -var 'rhsm_userid=<rhsm userid>' -var 'rhsm_password=<rhsm password>' rhel-7.2-vbox.json
-```
+Follow [these instructions](packer/README.md)

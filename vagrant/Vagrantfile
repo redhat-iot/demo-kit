@@ -16,7 +16,6 @@ VM_CPU = ENV['VM_CPU'] || 1
 VM_MEMORY = ENV['VM_MEMORY'] || 2048
 
 # Validate required plugins
-REQUIRED_PLUGINS = %w(vagrant-sshfs)
 # REQUIRED_PLUGINS = %w(vagrant-sshfs)
 errors = []
 
@@ -24,7 +23,7 @@ def message(name)
   "#{name} plugin is not installed, run `vagrant plugin install #{name}` to install it."
 end
 # Validate and collect error message if plugin is not installed
-REQUIRED_PLUGINS.each { |plugin| errors << message(plugin) unless Vagrant.has_plugin?(plugin) }
+#REQUIRED_PLUGINS.each { |plugin| errors << message(plugin) unless Vagrant.has_plugin?(plugin) }
 unless errors.empty?
   msg = errors.size > 1 ? "Errors: \n* #{errors.join("\n* ")}" : "Error: #{errors.first}"
   fail Vagrant::Errors::VagrantError.new, msg
@@ -36,6 +35,8 @@ Vagrant.configure(2) do |config|
     config.registration.skip = true
   end
   config.vm.box = 'rhel-7.2'
+  config.vm.box_url = 'http://files.organicelement.com/redhat-iot-demo-box.json'
+  config.vm.define "redhat-iot-demo" do |foohost| end
   # config.ssh.insert_key = false
   config.vm.provider "virtualbox" do |v, override|
     v.memory = VM_MEMORY
@@ -60,18 +61,17 @@ Vagrant.configure(2) do |config|
   # config.registration.proxy = PROXY = (ENV['PROXY'] || '')
   # config.registration.proxyUser = PROXY_USER = (ENV['PROXY_USER'] || '')
   # config.registration.proxyPassword = PROXY_PASSWORD = (ENV['PROXY_PASSWORD'] || '')
-
+  config.vm.post_up_message = "
+    Successfully started and provisioned VM with #{VM_CPU} cores and #{VM_MEMORY} MB of memory.
+    To modify the number of cores and/or available memory set the environment variables
+    VM_CPU and/or VM_MEMORY respectively.
+    
+    You can now access the Kura console on: http://localhost:8080
+    Default login is admin/admin
+  "
   config.vm.provision "shell", run: "always", env: {"KURA_INSTALLER" => demo_config['kura']['installer']}, inline: <<-SHELL
     echo "Installing Kura from $KURA_INSTALLER"
     sudo /vagrant/files/${KURA_INSTALLER}
     sudo systemctl start kura
-    echo
-    echo "Successfully started and provisioned VM with #{VM_CPU} cores and #{VM_MEMORY} MB of memory."
-    echo "To modify the number of cores and/or available memory set the environment variables"
-    echo "VM_CPU and/or VM_MEMORY respectively."
-    echo
-    echo "You can now access the Kura console on: http://localhost:8080"
-    echo "Default login is admin/admin"
-    echo
   SHELL
 end

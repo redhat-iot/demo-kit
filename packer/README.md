@@ -1,34 +1,44 @@
-## Packer templates for Red Hat Enterprise 7 x86_64
+## Packer templates for Red Hat Enterprise Linux 7.x x86_64
 
 ## Overview
 
 This repository contains templates for [RHEL7](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/index.html)
 x86_64 that creates [Vagrant](http://vagrantup.com) boxes using [Packer](http://packer.io).
 
+The end result is a base RHEL 7.2 box file that can be added locally for Vagrant. The subscription manager credentials are only used 
+during the build of the base box. They are used so that all of the additional installed packages and OS packages are the latest available
+at the time of the base box build. If your Vagrant configuration requires additional packages, you will need to supply user private config
+for a valid subscription as detailed in the README in the demo-kit/vagrant directory.
+
 ## Prerequisites
 
-To build all the boxes, you will need Packer and both VirtualBox and VMware
-Fusion installed. You will also need the RHEL7 64-bit ISO from Red Hat and, if
-using VirtualBox, the guest additions ISO matching the version of VirtualBox you
-are using (see [here](http://download.virtualbox.org/virtualbox)). VMWare Fusion
-comes packaged with their tools.
+1. Packer 1.8.5+
+2. Virtualbox
+3. RHEL 7.2 server iso (rhel-server-7.2-x86_64-dvd.iso)
 
-Once you've obtained the ISOs, copy all of them into the same directory
-(e.g. /usr/local/isos).
+## Creating the box
 
-## Creating the boxes
-
-* Export `ISO_URL` to the location of the installation ISO
-* Run packer with either the `rhel-7.0-vbox.json` or `rhel-7.0-vmware.json` template
-* Add the box to Vagrant
-* Build VMs
-
-### Example
-
+1. Copy the RHEL iso to packer/iso/ directory
 ```
-$ export ISO_URL=file:///usr/local/isos/rhel-server-7.0-x86_64-dvd.iso
-$ packer build rhel-7.0-vbox.json
-$ packer build rhel-7.0-vmware.json
-$ vagrant box add rhel-7.0-vbox ./rhel-7.0-vbox.box
-$ vagrant box add rhel-7.0-vmware ./rhel-7.0-vmware.box
+$ cp ~/Downloads/rhel-server-7.2-x86_64-dvd.iso demo-kit/packer/iso
+```
+
+1. Run packer with the following command and substitute your Red Hat Subscription Manager credentials
+```
+$ packer build -var 'rhsm_userid=<rhsm userid>' -var 'rhsm_password=<rhsm password>' rhel-7.2-vbox.json
+```
+This step takes several minutes so be patient. If it takes longer than 15 minutes it is probably hung at some step. 
+If it appears hung, you can abort with CTRL-C and run again with the --force option to force overwriting any previous attempt.
+```
+packer build --force -var 'rhsm_userid=<rhsm userid>' -var 'rhsm_password=<rhsm password>' rhel-7.2-vbox.json
+```
+1. Add/update the box in Vagrant. If you have any existing VMs created with this base box by Vagrant, you will have to `vagrant destroy` and then
+`vagrant up`.
+```
+$ vagrant box add rhel-7.2 rhel-7.2-vbox.box --force
+```
+4. Build VMs
+```
+$ cd ../vagrant
+$ vagrant up
 ```

@@ -1,12 +1,11 @@
 {
 	"variables": {
 		"vm_name": "rhel-7.2-vbox",
-		"iso_url": "{{env `ISO_URL`}}",
+		"iso_url": "iso/rhel-server-7.2-x86_64-dvd.iso",
 		"iso_sha256": "03f3a0291634335f6995534d829bd21ffaa0d000004dfeb1b2fb81052d64a4d5",
 		"rhsm_userid": "",
 		"rhsm_password": ""
 	},
-
 	"builders": [{
 		"type": "virtualbox-iso",
 		"guest_os_type": "RedHat_64",
