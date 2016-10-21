@@ -11,7 +11,7 @@ $ git clone https://github.com/redhat-iot/demo-kit.git
 $ cd demo-kit/vagrant
 ```
 
-* Download JBoss EAP 7 and JBoss Data Grid 7 to `files`
+* Download JBoss EAP 7 and JBoss Data Grid 7 to `vagrant/files`
 * Download Kura build
 ```
 $ curl https://s3.amazonaws.com/redhat-iot/kura_2.1.0-SNAPSHOT_fedorapi_installer.sh -o files/kura_2.1.0-SNAPSHOT_fedorapi_installer.sh
