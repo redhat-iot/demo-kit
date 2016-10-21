@@ -1,0 +1,21 @@
+[Unit]
+Description=Infinispan Memcached Server
+After=syslog.target network.target
+Before=httpd.service
+ 
+[Service]
+EnvironmentFile=/etc/infinispan-server/infinispan-server.conf
+#Environment=LAUNCH_JBOSS_IN_BACKGROUND=1
+#Environment=JBOSS_OPTS='-Djboss.socket.binding.port-offset=200 -b=0.0.0.0 -bmanagement=0.0.0.0'
+PIDFile=/var/run/infinispan-server/infinispan-server-standalone.pid
+#User=ispn
+#Group=ispn
+ExecStart=/opt/jboss-datagrid/bin/init.d/infinispan-server.sh start
+ExecStop=/opt/jboss-datagrid/bin/init.d/infinispan-server.sh stop
+ExecReload=/opt/jboss-datagrid/bin/init.d/infinispan-server.sh restart
+
+TimeoutStartSec=60
+TimeoutStopSec=60
+ 
+[Install]
+WantedBy=multi-user.target
