@@ -31,6 +31,15 @@ To start the VM, run the following command:
 ```
 vagrant up
 ```
+Once the VM has started, the installed application will be available through these links:
+
+|Application Links|
+|-----------------|
+|[Red Hat IoT Cargo Demo](http://localhost:8081)|
+|[Kura Web Console](http://localhost:8080)|
+|[Everyware Cloud](https://console-sandbox.everyware-cloud.com)|
+
+
 To stop the VM and destroy it completely, run:
 ```
 vagrant destroy
