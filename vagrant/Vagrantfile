@@ -38,6 +38,7 @@ Vagrant.configure(2) do |config|
   config.vm.box_url = 'http://files.organicelement.com/redhat-iot-demo-box.json'
   config.vm.define "redhat-iot-demo" do |foohost| end
   # config.ssh.insert_key = false
+  config.ssh.forward_agent = true
   config.vm.provider "virtualbox" do |v, override|
     v.memory = VM_MEMORY
     v.cpus   = VM_CPU
