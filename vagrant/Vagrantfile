@@ -76,8 +76,13 @@ Vagrant.configure(2) do |config|
     To modify the number of cores and/or available memory set the environment variables
     VM_CPU and/or VM_MEMORY respectively.
     
-    You can now access the Kura console on: http://localhost:8080
+    Kura console: http://localhost:8080
     Default login is admin/admin
+
+    Red Hat IoT Cargo Demo: http://localhost:8081
+
+    Everyware Cloud: https://console-sandbox.everyware-cloud.com
+
   "
   config.vm.provision "shell", name: "Kura Installation", run: "once", env: {"KURA_INSTALLER" => demo_config['kura']['installer']}, inline: <<-SHELL
     echo "Installing Kura from $KURA_INSTALLER"
