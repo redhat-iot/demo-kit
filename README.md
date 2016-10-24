@@ -49,14 +49,11 @@ Installing components to Kura
 ==
 Once you have the VM running, you can access the [Kura web console](http://localhost:8080) and login as admin/admin.
 
-Download the Red Hat IoT demo package on your host machine:
-```
-$ curl -O https://s3.amazonaws.com/redhat-iot/com.redhat.iot.demo.package_1.0.1-SNAPSHOT.dp
-```
-Back in the Kura UI, click on the "Packages" menu and then select "Install/Upgrade". Select the com.redhat.iot.demo.package_1.0.1-SNAPSHOT.dp file that you downloaded above from the download location. This installs the main demo components.
+In the Kura UI, click on the "Packages" menu and then select "Install/Upgrade". Select the com.redhat.iot.demo.package_1.0.2-SNAPSHOT.dp file from vagrant/files. This installs the main demo components.
 
 Due to a bug in Kura, to reinstall new versions you must first manually Uninstall the package and then install the new version in two steps.
 
+Once you have installed the component above, open a browser to http://localhost:8081 and click on one of the shipment lines to start visualizing the sensor data. Sensor data does not start streaming to the UI until you click on a shipment.
 
 
 Troubleshooting
