@@ -1,5 +1,7 @@
 .vagrant/
-vagrant/files/
+vagrant/files/jboss-datagrid-7.0.0-server.zip
+vagrant/files/jboss-eap-7.0.0.zip
+vagrant/files/kura_2.1.0-SNAPSHOT_fedorapi_installer.sh
 *.box
 packer/packer_cache/
 packer/output-virtualbox-iso/

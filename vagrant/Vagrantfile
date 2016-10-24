@@ -76,12 +76,16 @@ Vagrant.configure(2) do |config|
     To modify the number of cores and/or available memory set the environment variables
     VM_CPU and/or VM_MEMORY respectively.
     
-    Kura console: http://localhost:8080
-    Default login is admin/admin
+    Next Steps
+    ==========
+    1). Deploy the Red Hat Demo Package
+    Kura console: http://localhost:8080 (Default login is admin/admin)
+    Go to Packages -> Install and pick the file vagrant/files/com.redhat.iot.demo.package-1.0.2-SNAPSHOT.dp
 
-    Red Hat IoT Cargo Demo: http://localhost:8081
+    2). Open Red Hat IoT Cargo Demo: http://localhost:8081
+    Click on a shipment to start data graphing
 
-    Everyware Cloud: https://console-sandbox.everyware-cloud.com
+    3). Everyware Cloud: https://console-sandbox.everyware-cloud.com
 
   "
   config.vm.provision "shell", name: "Kura Installation", run: "once", env: {"KURA_INSTALLER" => demo_config['kura']['installer']}, inline: <<-SHELL
@@ -107,13 +111,8 @@ Vagrant.configure(2) do |config|
     sleep 5
     echo "Removing welcome content"
     sudo /opt/jboss-eap/bin/jboss-cli.sh --connect --commands="/subsystem=undertow/server=default-server/host=default-host/location=\/:remove,:reload" --controller=127.0.0.1:10090
-#    echo "Reloading"
-#    sleep 20
-#    sudo /opt/jboss-eap/bin/jboss-cli.sh --connect --command=":reload" --controller=127.0.0.1:10090
     echo "Deploy war files"
     sudo /opt/jboss-eap/bin/jboss-cli.sh --connect --commands="deploy /vagrant/files/ROOT.war,deploy /vagrant/files/dgproxy.war" --controller=127.0.0.1:10090
-#    sudo cp /vagrant/files/ROOT.war /opt/jboss-eap/standalone/deployments
-#    sudo cp /vagrant/files/dgproxy.war /opt/jboss-eap/standalone/deployments
   SHELL
 
   config.vm.provision "shell", name: "JBoss Data Grid Installation", run: "once", inline: <<-SHELL
@@ -125,7 +124,12 @@ Vagrant.configure(2) do |config|
     sudo cp /vagrant/files/infinispan-server.conf /etc/infinispan-server/
     sudo cp /vagrant/files/jdg7.service /etc/systemd/system/
     sudo systemctl daemon-reload
-    sudo systemctl start jdg7    
+    sudo systemctl start jdg7
+    until $(curl --output /dev/null --silent --head --fail http://localhost:8180/dgproxy/rest/rhiot/sensorConfig); do
+        printf '.'
+        sleep 1
+    done
+    curl --output /dev/null --silent -X PUT -d '@/vagrant/files/shipments.json' http://localhost:8180/dgproxy/rest/rhiot/sensorConfig -H 'Content-Type: application/json'
   SHELL
 
 end

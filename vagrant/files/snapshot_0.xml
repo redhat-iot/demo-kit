@@ -447,13 +447,13 @@
                 <esf:value>0</esf:value>
             </esf:property>
             <esf:property name="store.purge-age" array="false" encrypted="false" type="Integer">
-                <esf:value>60</esf:value>
+                <esf:value>30</esf:value>
             </esf:property>
             <esf:property name="in-flight-messages.republish-on-new-session" array="false" encrypted="false" type="Boolean">
                 <esf:value>true</esf:value>
             </esf:property>
             <esf:property name="store.capacity" array="false" encrypted="false" type="Integer">
-                <esf:value>1000</esf:value>
+                <esf:value>10000</esf:value>
             </esf:property>
             <esf:property name="disconnect.quiesce-timeout" array="false" encrypted="false" type="Integer">
                 <esf:value>10</esf:value>

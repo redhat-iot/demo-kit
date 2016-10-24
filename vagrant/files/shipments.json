@@ -1,0 +1,90 @@
+[
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:C0:55:07",
+    "fromAddress": "100 Central Avenue, Orlando, FL",
+    "toAddress": "Orlando International Airport",
+    "eta": "2016-10-25",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:C0:55:07"
+  },
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:00:00:00",
+    "fromAddress": "Boulder, CO",
+    "toAddress": "Ft. Collins, CO",
+    "eta": "2016-10-27",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:00:00:00"
+  },
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:00:00:01",
+    "fromAddress": "Jacksonville, FL",
+    "toAddress": "Lake City, FL",
+    "eta": "2016-10-26",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:00:00:01"
+  },
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:00:00:02",
+    "fromAddress": "Boise, ID",
+    "toAddress": "Salt Lake City, UT",
+    "eta": "2016-10-28",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:00:00:02"
+  },
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:00:00:03",
+    "fromAddress": "Spokane, WA",
+    "toAddress": "Missoula, MT",
+    "eta": "2016-11-01",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:00:00:03"
+  },
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:00:00:04",
+    "fromAddress": "Kansas City, KS",
+    "toAddress": "Omaha, NE",
+    "eta": "2016-10-29",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:00:00:04"
+  },
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:00:00:05",
+    "fromAddress": "Fargo, ND",
+    "toAddress": "St. Cloud, MN",
+    "eta": "2016-10-27",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:00:00:05"
+  },
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:00:00:06",
+    "fromAddress": "Austin, TX",
+    "toAddress": "San Antonio, TX",
+    "eta": "2016-10-26",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:00:00:06"
+  },
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:00:00:07",
+    "fromAddress": "Charlotte, NC",
+    "toAddress": "Albemarle, NC",
+    "eta": "2016-10-28",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:00:00:07"
+  },
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:00:00:08",
+    "fromAddress": "Albany, NY",
+    "toAddress": "Burlington, VT",
+    "eta": "2016-10-27",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:00:00:08"
+  },
+  {
+    "pkgId": "Red-Hat/demo-gw-vm/demo-kit/assets/B0:B4:48:00:00:09",
+    "fromAddress": "Amarillo, TX",
+    "toAddress": "Tucumcari, NM",
+    "eta": "2016-10-29",
+    "randomData": false,
+    "name": "Demo Shipment B0:B4:48:00:00:09"
+  }
+]
