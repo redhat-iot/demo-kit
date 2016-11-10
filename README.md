@@ -31,19 +31,6 @@ To start the VM, run the following command:
 ```
 vagrant up
 ```
-There is a known issue where sometimes the VM will appear to hang at the following message for several minutes:
-```
-==> redhat-iot-demo: Waiting for machine to boot. This may take a few minutes...
-    redhat-iot-demo: SSH address: 127.0.0.1:2222
-    redhat-iot-demo: SSH username: vagrant
-    redhat-iot-demo: SSH auth method: private key
-```
-If this message remains for more than 1 minute, log in to the VM console using vagrant/vagrant login and run the following command:
-```
-sudo dhclient
-```
-After a few seconds, the command should return and the `vagrant up` command in your shell window should continue. This is a known issue and we are working on a permanent fix for the VM image.
-
 Once the VM has started, the installed application will be available through these links:
 
 |Application Links|
