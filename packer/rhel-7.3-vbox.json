@@ -1,8 +1,8 @@
 {
 	"variables": {
-		"vm_name": "rhel-7.2-vbox",
-		"iso_url": "iso/rhel-server-7.2-x86_64-dvd.iso",
-		"iso_sha256": "03f3a0291634335f6995534d829bd21ffaa0d000004dfeb1b2fb81052d64a4d5",
+		"vm_name": "rhel-7.3-vbox",
+		"iso_url": "iso/rhel-server-7.3-x86_64-dvd.iso",
+		"iso_sha256": "120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f",
 		"rhsm_userid": "",
 		"rhsm_password": ""
 	},
@@ -31,7 +31,7 @@
 		"boot_command": [
 			"<esc><wait>",
 			"vmlinuz initrd=initrd.img net.ifnames=0 biosdevname=0 ",
-			"ks=http://{{.HTTPIP}}:{{.HTTPPort}}/vbox-ks-7.2.cfg",
+			"ks=http://{{.HTTPIP}}:{{.HTTPPort}}/vbox-ks-7.3.cfg",
 			"<enter>"
 		]
 	}],
@@ -41,11 +41,6 @@
 	    "destination": "/tmp/ifconfig"
 	},
 	{
-	    "type": "file",
-	    "source": "files/bluez-5.39-1.el7.x86_64.rpm",
-	    "destination": "/tmp/bluez-5.39-1.el7.x86_64.rpm"
-	},
-	{
 	    "type": "shell",
 		"execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
 		"inline": [
@@ -53,13 +48,6 @@
 			"subscription-manager register --username {{user `rhsm_userid`}} --password {{user `rhsm_password`}}",
 			"subscription-manager attach --auto",			
 			"echo Finished subscribing..."
-		]
-	},
-	{
-		"type": "shell",
-		"execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-		"inline": [
-			"yum -y localinstall /tmp/bluez-5.39-1.el7.x86_64.rpm"
 		]
 	},
 	{
@@ -78,7 +66,6 @@
 			"scripts/vagrant.sh",
 			"scripts/sshd.sh",
 			"scripts/virtualbox.sh",
-			"scripts/bluez.sh",
 			"scripts/kura.sh",
 			"scripts/cleanup.sh"
 		]

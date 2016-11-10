@@ -47,6 +47,17 @@ rm -f /var/log/*.syslog
 rm -rf /tmp/*
 rm -rf /tmp/*.*
 
+# Fixes these issues with network startup on CentOS, Fedora, and RHEL
+# https://github.com/CentOS/sig-cloud-instance-build/issues/24
+# https://github.com/CentOS/sig-cloud-instance-build/issues/38
+cat > /etc/sysconfig/network-scripts/ifcfg-eth0 << EOF
+DEVICE="eth0"
+BOOTPROTO="dhcp"
+ONBOOT="yes"
+TYPE="Ethernet"
+PERSISTENT_DHCLIENT="yes"
+EOF
+
 echo '==> Clear out swap and disable until reboot'
 DISK_USAGE_BEFORE_CLEANUP=$(df -h)
 set +e
