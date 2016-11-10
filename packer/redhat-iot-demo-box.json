@@ -31,7 +31,7 @@
                 "name": "virtualbox",
                 "url": "http://redhat-iot.s3-website-us-east-1.amazonaws.com/rhel-7.2-vbox-0.1.3.box",
                 "checksum_type": "sha1",
-                "checksum": "94cacd604eca5517bff709981be959e8ce792bc3"
+                "checksum": "fc2f087729c07f2bdd97f35ad5a31e8c26b01f95"
         }]
     }]
 }
