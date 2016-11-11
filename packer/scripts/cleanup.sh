@@ -50,6 +50,7 @@ rm -rf /tmp/*.*
 # Fixes these issues with network startup on CentOS, Fedora, and RHEL
 # https://github.com/CentOS/sig-cloud-instance-build/issues/24
 # https://github.com/CentOS/sig-cloud-instance-build/issues/38
+# https://github.com/mitchellh/packer/issues/866
 cat > /etc/sysconfig/network-scripts/ifcfg-eth0 << EOF
 DEVICE="eth0"
 BOOTPROTO="dhcp"
