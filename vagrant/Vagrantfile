@@ -89,7 +89,7 @@ Vagrant.configure(2) do |config|
     3). Everyware Cloud: https://console-sandbox.everyware-cloud.com
 
   "
-  config.vm.provision "shell", name: "Kura Installation", run: "once", env: {"KURA_INSTALLER" => demo_config['kura']['installer']}, inline: <<-SHELL
+  config.vm.provision "kura", type: :shell, name: "Kura Installation", run: "once", env: {"KURA_INSTALLER" => demo_config['kura']['installer']}, inline: <<-SHELL
     echo "Installing Kura from $KURA_INSTALLER"
     sudo /vagrant/files/${KURA_INSTALLER}
     sudo cp /vagrant/files/snapshot_0.xml /opt/eclipse/kura/data/snapshots/
@@ -99,7 +99,7 @@ Vagrant.configure(2) do |config|
     sudo systemctl start kura
   SHELL
 
-  config.vm.provision "shell", name: "JBoss EAP Installation", run: "once", inline: <<-SHELL
+  config.vm.provision "eap", type: :shell, name: "JBoss EAP Installation", run: "once", inline: <<-SHELL
     echo "Installing JBoss EAP 7"
     sudo systemctl stop iptables
     cd /opt
@@ -112,11 +112,19 @@ Vagrant.configure(2) do |config|
     sleep 5
     echo "Removing welcome content"
     sudo /opt/jboss-eap/bin/jboss-cli.sh --connect --commands="/subsystem=undertow/server=default-server/host=default-host/location=\/:remove,:reload" --controller=127.0.0.1:10090
-    echo "Deploy war files"
-    sudo /opt/jboss-eap/bin/jboss-cli.sh --connect --commands="deploy /vagrant/files/ROOT.war,deploy /vagrant/files/dgproxy.war" --controller=127.0.0.1:10090
+    sleep 5
   SHELL
 
-  config.vm.provision "shell", name: "JBoss Data Grid Installation", run: "once", inline: <<-SHELL
+#    echo "Deploy war files"
+#    sudo /opt/jboss-eap/bin/jboss-cli.sh --connect --commands="deploy /vagrant/files/ROOT.war,deploy /vagrant/files/dgproxy.war" --controller=127.0.0.1:10090
+
+  config.vm.provision 'webapp', type: :shell, name: "Deploy Web App", run: "once", inline: <<-SHELL
+    echo "Redeploying the Webapp"
+    sudo /opt/jboss-eap/bin/jboss-cli.sh --connect --commands="deploy --force /vagrant/files/ROOT.war,deploy --force /vagrant/files/dgproxy.war, :reload" --controller=127.0.0.1:10090
+    sleep 10
+  SHELL
+
+  config.vm.provision "jdg", type: :shell, run: "once", inline: <<-SHELL
     echo "Installing JBoss Data Grid"
     cd /opt
     sudo unzip -qn /vagrant/files/jboss-datagrid-7.0.0-server.zip
@@ -132,5 +140,6 @@ Vagrant.configure(2) do |config|
     done
     curl --output /dev/null --silent -X PUT -d '@/vagrant/files/shipments.json' http://localhost:8180/dgproxy/rest/rhiot/sensorConfig -H 'Content-Type: application/json'
   SHELL
+
 
 end
