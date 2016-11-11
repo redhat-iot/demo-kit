@@ -29,6 +29,9 @@ unless errors.empty?
   fail Vagrant::Errors::VagrantError.new, msg
 end
 
+# Remove any stale camelLock files from file watcher component
+# Probably needs to be in a cleanup or post provision event
+Dir.glob(File.expand_path File.dirname(__FILE__) + '/files/*.camelLock').each { |file| File.delete(file)}
 
 Vagrant.configure(2) do |config|
   if Vagrant.has_plugin?("vagrant-registration") then
