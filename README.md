@@ -1,9 +1,21 @@
 Red Hat IoT Demo Kit
 =
-This project contains a vagrant VM configuration for running a RHEL based gateway with the Eclipse Kura intelligent gateway software. In addition, the packer directory 
-contains a packer project to recreate the base RHEL box image used by the vagrant config.
+This project contains the Asset Tracking Demo showcasing Red Hat technologies used in IoT solutions. This is a RHEL VM based gateway with the Eclipse Kura intelligent gateway software installed, as well as a JBoss EAP web application for monitoring sensor data.
 
-Pre-Requisites
+Once you follow the directions below in "Getting Started", you will have a running VM containing the 
+following components that make up the IoT Asset Tracking Demo:
+- Kura intelligent gateway
+	- Sensor components
+	- Connector to Everyware Cloud
+- JBoss EAP 7
+	- Asset Tracking demo web UI
+	- JBoss Data Grid
+
+Screenshot
+====
+![Screenshot](/screenshots/ss1.png?raw=true "IoT Asset Tracking Demo")
+
+Getting Started
 ==
 * Clone this repository and change to the project directory:
 ```
