@@ -8,10 +8,10 @@ Pre-Requisites
 * Clone this repository and change to the project directory:
 ```
 $ git clone https://github.com/redhat-iot/demo-kit.git
-$ cd demo-kit/vagrant
+$ cd demo-kit
 ```
 
-* Download JBoss EAP 7 and JBoss Data Grid 7 to `vagrant/files`. (Files should be jboss-eap-7.0.0.zip and jboss-datagrid-7.0.0-server.zip)
+* Download JBoss EAP 7 and JBoss Data Grid 7 to `files/`. (Files should be jboss-eap-7.0.0.zip and jboss-datagrid-7.0.0-server.zip)
 * Download Kura build and make it executable
 ```
 $ curl https://s3.amazonaws.com/redhat-iot/kura_2.1.0-SNAPSHOT_fedorapi_installer.sh -o files/kura_2.1.0-SNAPSHOT_fedorapi_installer.sh
@@ -21,7 +21,7 @@ $ chmod +x files/kura_2.1.0-SNAPSHOT_fedorapi_installer.sh
 * Create a private configuration file from template
 ```
 $ mkdir $HOME/.vagrant.d
-$ cp vagrant/redhat-iot-demo.yml $HOME/.vagrant.d/redhat-iot-demo.yml
+$ cp redhat-iot-demo.yml $HOME/.vagrant.d/redhat-iot-demo.yml
 ```
 Edit new file as needed (default should be ok unless you are doing Kura development).
 
@@ -81,8 +81,8 @@ Additional commands to know are:
 
 
 
-More details in [these instructions](vagrant/README.md)
+More details in [these instructions](README.md)
 
-Creating base RHEL box
+Creating base RHEL box (only necessary if you need something other than the default RHEL VM images)
 ==
-Follow [these instructions](packer/README.md)
+See [these instructions](https://github.com/redhat-iot/demo-tooling/README.md)
