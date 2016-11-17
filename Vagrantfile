@@ -5,7 +5,6 @@ require 'yaml'
 
 demo_config = YAML.load_file(File.join(ENV['HOME'], '.vagrant.d', 'redhat-iot-demo.yml'))
 
-# The private network IP of the VM. You will use this IP to connect to OpenShift.
 # This variable is ignored for Hyper-V provider.
 PRIVATE_ADDRESS="10.1.2.2"
 
@@ -38,7 +37,7 @@ Vagrant.configure(2) do |config|
     config.registration.skip = true
   end
   config.vm.box = 'rhel-7.2'
-  config.vm.box_url = 'https://rawgit.com/redhat-iot/demo-kit/master/packer/redhat-iot-demo-box.json'
+  config.vm.box_url = 'https://rawgit.com/redhat-iot/demo-tooling/master/atlas/rhel-7.2-box.json'
   config.vm.define "redhat-iot-demo" do |foohost| end
   # config.ssh.insert_key = false
   config.ssh.forward_agent = true
