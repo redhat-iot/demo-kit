@@ -15,16 +15,15 @@ Screenshot
 ====
 ![Screenshot](/screenshots/ss1.png?raw=true "IoT Asset Tracking Demo")
 
-Getting Started
-==
-
 Requirements
-===
+=
 - Vagrant
 - VirtualBox
 
 _Note: These instructions are for running this demo on Mac. For running this demo on RHEL, follow [these](http://xxx) additional steps_
 
+Getting Started
+==
 1. Clone this repository and change to the project directory:
 ```
 $ git clone https://github.com/redhat-iot/demo-kit.git
