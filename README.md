@@ -17,13 +17,21 @@ Screenshot
 
 Getting Started
 ==
+
+Requirements
+===
+- Vagrant
+- VirtualBox
+
+_Note: These instructions are for running this demo on Mac. For running this demo on RHEL, follow [these](http://xxx) additional steps_
+
 1. Clone this repository and change to the project directory:
 ```
 $ git clone https://github.com/redhat-iot/demo-kit.git
 $ cd demo-kit
 ```
 
-2. Download JBoss EAP 7 and JBoss Data Grid 7 to `files/`. (Files should be jboss-eap-7.0.0.zip and jboss-datagrid-7.0.0-server.zip)
+2. Download JBoss EAP 7 and JBoss Data Grid Server 7 to `files/`. (Files should be jboss-eap-7.0.0.zip and jboss-datagrid-7.0.0-server.zip)
 3. Download Kura build and make it executable
 ```
 $ curl https://s3.amazonaws.com/redhat-iot/kura_2.1.0-SNAPSHOT_fedorapi_installer.sh -o files/kura_2.1.0-SNAPSHOT_fedorapi_installer.sh
