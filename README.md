@@ -15,22 +15,22 @@ Screenshot
 ====
 ![Screenshot](/screenshots/ss1.png?raw=true "IoT Asset Tracking Demo")
 
-Requirements
-=
+#### Prequisites
+- Git
 - Vagrant
 - VirtualBox
 
-_Note: These instructions are for running this demo on Mac. For running this demo on RHEL, follow [these](http://xxx) additional steps_
+**_Note: These instructions are for running this demo on Mac. For running this demo on RHEL, follow [these](http://xxx) additional steps_**
 
 Getting Started
 ==
-1. Clone this repository and change to the project directory:
+1. In a console, clone this repository and change to the project directory:
 ```
 $ git clone https://github.com/redhat-iot/demo-kit.git
 $ cd demo-kit
 ```
 
-2. Download JBoss EAP 7 and JBoss Data Grid Server 7 to `files/`. (Files should be jboss-eap-7.0.0.zip and jboss-datagrid-7.0.0-server.zip)
+2. Download JBoss EAP 7 (jboss-eap-7.0.0.zip) and JBoss Data Grid Server 7 (jboss-datagrid-7.0.0-server.zip) from [Red Hat Customer Portal](https://access.redhat.com/jbossnetwork/restricted/listSoftware.html?product=appplatform&downloadType=distributions) and save these to `files/`
 3. Download Kura build and make it executable
 ```
 $ curl https://s3.amazonaws.com/redhat-iot/kura_2.1.0-SNAPSHOT_fedorapi_installer.sh -o files/kura_2.1.0-SNAPSHOT_fedorapi_installer.sh
