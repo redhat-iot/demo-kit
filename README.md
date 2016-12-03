@@ -15,7 +15,7 @@ Screenshot
 ====
 ![Screenshot](/screenshots/ss1.png?raw=true "IoT Asset Tracking Demo")
 
-#### Prequisites
+### Prequisites
 - Git
 - Vagrant
 - VirtualBox
