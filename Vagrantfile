@@ -51,6 +51,8 @@ Vagrant.configure(2) do |config|
     v.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Broadcom Corp BCM20702A0 [0112]', '--vendorid', '0x0A5C', '--productid', '0x21E8']
     v.customize ["modifyvm", :id, "--ioapic", "on"]
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    v.customize ["modifyvm", :id, "--cableconnected1", "on"]
+    v.customize ["modifyvm", :id, "--cableconnected2", "on"]
   end
 
   config.vm.provider "libvirt" do |v, override|
