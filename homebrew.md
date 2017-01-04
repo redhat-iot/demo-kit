@@ -12,5 +12,4 @@ $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/inst
 ```
 $ brew cask install virtualbox
 $ brew cask install vagrant
-Install VirtualBox an Vagrant
 ```
