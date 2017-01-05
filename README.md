@@ -19,7 +19,7 @@ Screenshot
 - Vagrant
 - VirtualBox
 
-**_Note: These instructions are for running this demo on Mac. For running this demo on RHEL, follow [these](http://xxx) additional steps_**
+**_Note: These instructions are for running this demo on Mac - you can [use homebrew to install prerequisites](https://github.com/ishuverma/demo-kit/blob/Ishu's-edits/homebrew.md). For running this demo on RHEL, follow [these](http://xxx) additional steps_**
 
 Getting Started
 ==
